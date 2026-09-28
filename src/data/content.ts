@@ -97,72 +97,212 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   },
 ];
 
+export interface ProjectWorkBreakdown {
+  frontend: string[];
+  backend: string[];
+}
+
 export interface Project {
   title: string;
+  domain: string;
   category: string;
   description: string;
   tags: string[];
   featured?: boolean;
-  mockup: 'browser' | 'dashboard' | 'terminal' | 'mobile';
+  image?: string;
+  mockup: 'crm' | 'books' | 'hr' | 'inventory' | 'project' | 'school';
+  work: ProjectWorkBreakdown;
+  liveUrl?: string;
 }
 
 export const PROJECTS: Project[] = [
   {
-    title: 'ProFlowers',
-    category: 'Flower Booking Platform',
-    description: 'A flower booking platform developed as part of a team, where I contributed to admin-panel UI development and REST API implementation.',
-    tags: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'AWS'],
+    title: 'CRM Platform',
+    domain: 'crm.techsunset.com',
+    category: 'Customer & Lead Management',
+    description: 'CRM (Customer Relationship Management) is a software used to manage customers, leads, sales, and customer interactions in one place.',
+    tags: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB'],
     featured: true,
-    mockup: 'browser',
+    image: '/images/crm.jpg',
+    mockup: 'crm',
+    liveUrl: 'https://crm.techsunset.com',
+    work: {
+      frontend: [
+        'Customer list and customer details view',
+        'Customer add and edit forms with validation',
+        'Lead management and sales pipeline screens',
+        'Real-time search and multi-parameter filtering',
+        'Interactive analytics dashboard and data visualization',
+        'REST API integration with backend services',
+        'Form validation and comprehensive error handling',
+      ],
+      backend: [
+        'Full CRUD REST APIs for customer data',
+        'Lead management and conversion lifecycle APIs',
+        'Optimized search indexing for customers and leads',
+        'Customer status and pipeline state updates',
+        'User authentication and role-based authorization (JWT)',
+        'Request validation and structured error handling middleware',
+        'MongoDB schema design, indexing and database connection',
+      ],
+    },
   },
   {
-    title: 'ShopSphere',
-    category: 'E-commerce Platform',
-    description: 'Full-featured e-commerce platform with product catalog, cart, checkout, and admin dashboard.',
-    tags: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
-    mockup: 'dashboard',
+    title: 'TechSunset Books',
+    domain: 'books.techsunset.com',
+    category: 'Accounting, GST & Invoicing',
+    description: 'TechSunset Books is accounting and invoicing software used to manage invoices, payments, expenses, customers, vendors, GST, and financial reports in one place.',
+    tags: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB'],
+    featured: true,
+    image: '/images/books.jpg',
+    mockup: 'books',
+    liveUrl: 'https://books.techsunset.com',
+    work: {
+      frontend: [
+        'Financial summary dashboard & revenue metrics',
+        'Invoice list, invoice creation forms & PDF export',
+        'Customer and vendor ledger management',
+        'Expense tracking and categorization screens',
+        'Payment status and transaction tracking',
+        'GST tax summary and financial reports',
+        'API integration, form validation and error handling',
+      ],
+      backend: [
+        'CRUD APIs for creating, updating, deleting and fetching invoices',
+        'Customer and vendor management endpoints',
+        'Expense management and ledger calculation',
+        'Payment tracking and reconciliation APIs',
+        'GST calculation and financial report data engine',
+        'Request validation and error handling middleware',
+        'MongoDB integration for invoices, expenses and financial data',
+      ],
+    },
   },
   {
-    title: 'CryptoTrack',
-    category: 'Crypto Website',
-    description: 'Real-time cryptocurrency tracking platform with live price charts and portfolio management.',
-    tags: ['React.js', 'REST APIs', 'TypeScript', 'Chart.js'],
-    mockup: 'browser',
+    title: 'TechSunset HR',
+    domain: 'hr.techsunset.com',
+    category: 'HRMS & Employee Management',
+    description: 'TechSunset HR is an Human Resource management software used to manage employees, attendance, leaves, onboarding, departments, holidays, and HR reports in one place.',
+    tags: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB'],
+    image: '/images/hr.jpg',
+    mockup: 'hr',
+    liveUrl: 'https://hr.techsunset.com',
+    work: {
+      frontend: [
+        'Employee directory, profile cards and details view',
+        'Employee add and edit forms with document upload',
+        'Daily attendance management and check-in screens',
+        'Leave request submission and approval workflows',
+        'Department structure and holiday calendar management',
+        'Employee onboarding flow and checklists',
+        'HR reports, department headcount and analytics dashboard',
+        'API integration, form validation and error handling',
+      ],
+      backend: [
+        'Employee CRUD operations and profile data APIs',
+        'Attendance tracking and monthly logging APIs',
+        'Leave management and approval workflow engine',
+        'Department and holiday schedule management',
+        'Employee onboarding lifecycle management',
+        'HR analytics, reporting and export endpoints',
+        'Authentication, authorization, validation and MongoDB connection',
+      ],
+    },
   },
   {
-    title: 'EstateHub',
-    category: 'Real-Estate Platform',
-    description: 'Property listing platform with search filters, map integration, and agent dashboards.',
-    tags: ['Next.js', 'Node.js', 'MongoDB', 'AWS S3'],
-    mockup: 'browser',
+    title: 'TechSunset Inventory',
+    domain: 'inventory.techsunset.com',
+    category: 'Inventory & Warehouse System',
+    description: 'TechSunset Inventory is inventory management software used to manage products, stock, orders, suppliers, warehouses, and fulfillment in one place.',
+    tags: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB'],
+    image: '/images/inventory.jpg',
+    mockup: 'inventory',
+    liveUrl: 'https://inventory.techsunset.com',
+    work: {
+      frontend: [
+        'Product catalog, SKU list and product details view',
+        'Add and edit product forms with multi-variants',
+        'Real-time inventory levels and low-stock alert screens',
+        'Sales order management and tracking screens',
+        'Supplier directory and purchase order management',
+        'Multi-warehouse stock allocation management',
+        'Fulfillment tracking and stock valuation reports',
+        'API integration, search and filtering',
+      ],
+      backend: [
+        'Product CRUD operations and variant management',
+        'Stock and inventory level synchronization APIs',
+        'Sales order lifecycle and status management',
+        'Supplier and purchase order management APIs',
+        'Warehouse allocation and transfer routing',
+        'Stock reservation and automatic inventory decrement',
+        'Request validation, error handling and MongoDB connection',
+      ],
+    },
   },
   {
-    title: 'MediCare',
-    category: 'Doctor / Clinical Website',
-    description: 'Clinical appointment booking system with doctor schedules and patient records management.',
-    tags: ['React.js', 'Express.js', 'MongoDB', 'Tailwind'],
-    mockup: 'mobile',
+    title: 'TechSunset Project',
+    domain: 'project.techsunset.com',
+    category: 'Task & Project Management',
+    description: 'TechSunset Project is project and task management software used to manage projects, tasks, deadlines, milestones, team workload, and progress in one place.',
+    tags: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB'],
+    image: '/images/project.jpg',
+    mockup: 'project',
+    liveUrl: 'https://project.techsunset.com',
+    work: {
+      frontend: [
+        'Project list, overview cards and project details',
+        'Task creation modal with priority, tags and assignees',
+        'Interactive Drag-and-Drop Kanban board view',
+        'Task status, priority badges and sprint filters',
+        'Calendar view and milestone deadline timeline',
+        'Milestone tracking and overall project progress bars',
+        'Team workload distribution and performance reports',
+        'API integration, form validation and notifications',
+      ],
+      backend: [
+        'Project CRUD operations and workspace management',
+        'Task and subtask hierarchy management APIs',
+        'Assigning tasks to team members and workload tracking',
+        'Task status transitions and priority management',
+        'Milestone, sprint and deadline management engine',
+        'Team workload analytics and time tracking APIs',
+        'Request validation, error handling and MongoDB database connection',
+      ],
+    },
   },
   {
-    title: 'ReviewHub',
-    category: 'Feedback & Review Platform',
-    description: 'Review and rating platform with moderation tools and analytics dashboard.',
-    tags: ['Next.js', 'Node.js', 'MongoDB', 'AWS Lambda'],
-    mockup: 'dashboard',
-  },
-  {
-    title: 'AdminPanel',
-    category: 'Admin Dashboard',
-    description: 'Reusable admin dashboard framework with CRUD operations, charts, and role-based access.',
-    tags: ['React.js', 'TypeScript', 'Node.js', 'Express.js'],
-    mockup: 'terminal',
-  },
-  {
-    title: 'BusinessApp',
-    category: 'Custom Business Web Application',
-    description: 'Tailored business workflow application automating internal processes and reporting.',
-    tags: ['Next.js', 'Node.js', 'MongoDB', 'AWS EC2'],
-    mockup: 'browser',
+    title: 'TS Campus',
+    domain: 'tscampus.com',
+    category: 'School Management ERP System',
+    description: 'TS Campus is a school management system used to manage admissions, students, attendance, fees, exams, staff, communication, and other school operations in one place.',
+    tags: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB'],
+    image: '/images/tscampus.jpg',
+    mockup: 'school',
+    liveUrl: 'https://tscampus.com',
+    work: {
+      frontend: [
+        'Student directory, profile view and academic records',
+        'Admission portal and student registration forms',
+        'Classroom daily attendance management',
+        'Fee structure, fee collection and receipt generation',
+        'Class, section and subject timetable management',
+        'Exam scheduling, marks entry and report card screens',
+        'Staff and teacher HR management directory',
+        'Dashboard analytics, student reports and notifications',
+        'API integration, form validation and error handling',
+      ],
+      backend: [
+        'Student records and admission processing APIs',
+        'Attendance management and reporting endpoints',
+        'Fee structure, payment tracking and receipt APIs',
+        'Class, section and subject timetable relational APIs',
+        'Exam scheduling, grading and result calculation engine',
+        'Staff and employee management endpoints',
+        'Notification broadcasting and communication service',
+        'Authentication, RBAC and MongoDB database connection',
+      ],
+    },
   },
 ];
 

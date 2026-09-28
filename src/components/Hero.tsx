@@ -1,21 +1,62 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import {
   motion,
   useMotionValue,
   useSpring,
+  AnimatePresence,
 } from 'framer-motion';
 import {
   ArrowRight,
-  BriefcaseBusiness,
   Download,
   Sparkles,
-  Terminal,
+  CheckCircle2,
+  Atom,
+  Hexagon,
+  Server,
+  Database,
+  Cloud,
+  Code2,
+  Layers,
+  Container,
+  DatabaseZap,
+  Radio,
+  Workflow,
+  ListChecks,
+  BrainCircuit,
+  Braces,
+  Wind,
+  GitBranch,
+  Cpu,
 } from 'lucide-react';
 
-import { HERO_TECHS, PROFILE } from '../data/content';
+import { PROFILE } from '../data/content';
 import { MagneticButton } from '../lib/animation';
 
-function CodeEditorVisual() {
+const HERO_SKILLS = [
+  { name: 'React', category: 'Frontend', icon: Atom, color: 'text-cyan-400', badge: 'v19 / SPA' },
+  { name: 'Next.js', category: 'Frontend', icon: Hexagon, color: 'text-ink-100', badge: 'App Router' },
+  { name: 'TypeScript', category: 'Frontend', icon: Code2, color: 'text-blue-400', badge: 'Type Safety' },
+  { name: 'JavaScript', category: 'Frontend', icon: Braces, color: 'text-yellow-400', badge: 'ES6+ / Modern' },
+  { name: 'Tailwind CSS', category: 'Frontend', icon: Wind, color: 'text-sky-400', badge: 'Styling' },
+  { name: 'Node.js', category: 'Backend', icon: Server, color: 'text-green-400', badge: 'Runtime' },
+  { name: 'Express.js', category: 'Backend', icon: Cpu, color: 'text-ink-200', badge: 'REST APIs' },
+  { name: 'Gen AI', category: 'AI & Cloud', icon: BrainCircuit, color: 'text-purple-400', badge: 'LLMs & Agents' },
+  { name: 'MongoDB', category: 'Database', icon: Database, color: 'text-emerald-400', badge: 'NoSQL' },
+  { name: 'PostgreSQL', category: 'Database', icon: Database, color: 'text-blue-400', badge: 'Relational' },
+  { name: 'Prisma ORM', category: 'Database', icon: Layers, color: 'text-indigo-400', badge: 'Schema & Query' },
+  { name: 'Redis', category: 'Database', icon: DatabaseZap, color: 'text-red-400', badge: 'Cache / PubSub' },
+  { name: 'AWS Cloud', category: 'AI & Cloud', icon: Cloud, color: 'text-orange-400', badge: 'Cloud Infra' },
+  { name: 'Docker', category: 'AI & Cloud', icon: Container, color: 'text-blue-400', badge: 'Containers' },
+  { name: 'CI/CD', category: 'AI & Cloud', icon: GitBranch, color: 'text-orange-400', badge: 'Pipelines' },
+  { name: 'Kafka', category: 'Backend', icon: Radio, color: 'text-amber-300', badge: 'Event Stream' },
+  { name: 'RabbitMQ', category: 'Backend', icon: Workflow, color: 'text-orange-300', badge: 'Message Queue' },
+  { name: 'BullMQ', category: 'Backend', icon: ListChecks, color: 'text-rose-400', badge: 'Job Processing' },
+];
+
+const CATEGORIES = ['All', 'Frontend', 'Backend', 'Database', 'AI & Cloud'] as const;
+
+function HeroSkillsVisual() {
+  const [activeCategory, setActiveCategory] = useState<string>('All');
   const containerRef = useRef<HTMLDivElement>(null);
 
   const rotateX = useMotionValue(0);
@@ -39,14 +80,18 @@ function CodeEditorVisual() {
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    rotateX.set(-y * 6);
-    rotateY.set(x * 6);
+    rotateX.set(-y * 5);
+    rotateY.set(x * 5);
   };
 
   const reset = () => {
     rotateX.set(0);
     rotateY.set(0);
   };
+
+  const filteredSkills = activeCategory === 'All'
+    ? HERO_SKILLS
+    : HERO_SKILLS.filter((s) => s.category === activeCategory);
 
   return (
     <motion.div
@@ -67,641 +112,307 @@ function CodeEditorVisual() {
         items-center
       "
     >
+      {/* Ambient background glow */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -inset-4
+          rounded-3xl
+          bg-linear-to-br
+          from-lime-400/15
+          via-emerald-500/10
+          to-transparent
+          blur-2xl
+        "
+      />
+
+      {/* ===================================================
+          FLOATING TECH BADGES
+      =================================================== */}
+      {[
+        {
+          name: 'React.js',
+          icon: Atom,
+          color: 'text-cyan-400',
+          position: '-left-4 -top-3',
+          animation: 'animate-float-slow',
+          delay: 0.6,
+          shadow: 'shadow-cyan-500/15',
+        },
+        {
+          name: 'Next.js',
+          icon: Hexagon,
+          color: 'text-ink-100',
+          position: '-right-4 -top-2',
+          animation: 'animate-float-medium',
+          delay: 0.7,
+          shadow: 'shadow-white/10',
+        },
+        {
+          name: 'Node.js',
+          icon: Server,
+          color: 'text-green-400',
+          position: '-left-6 top-1/2 -translate-y-1/2',
+          animation: 'animate-float-fast',
+          delay: 0.8,
+          shadow: 'shadow-green-500/15',
+        },
+        {
+          name: 'Gen AI',
+          icon: BrainCircuit,
+          color: 'text-purple-400',
+          position: '-right-6 top-1/2 -translate-y-1/2',
+          animation: 'animate-float-slow',
+          delay: 0.9,
+          shadow: 'shadow-purple-500/15',
+        },
+        {
+          name: 'AWS Cloud',
+          icon: Cloud,
+          color: 'text-orange-400',
+          position: '-left-3 -bottom-3',
+          animation: 'animate-float-medium',
+          delay: 1.0,
+          shadow: 'shadow-orange-500/15',
+        },
+        {
+          name: 'PostgreSQL',
+          icon: Database,
+          color: 'text-blue-400',
+          position: '-right-3 -bottom-3',
+          animation: 'animate-float-fast',
+          delay: 1.05,
+          shadow: 'shadow-blue-500/15',
+        },
+      ].map((badge) => {
+        const Icon = badge.icon;
+        return (
+          <motion.div
+            key={badge.name}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: badge.delay, type: 'spring' }}
+            className={`
+              absolute
+              z-30
+              ${badge.position}
+              ${badge.animation}
+              hidden
+              xl:block
+            `}
+            style={{ transform: 'translateZ(40px)' }}
+          >
+            <div
+              className={`
+                flex
+                items-center
+                gap-2.5
+                rounded-xl
+                border
+                border-ink-700/80
+                bg-ink-900/90
+                px-3.5
+                py-2
+                shadow-lg
+                backdrop-blur-md
+                ${badge.shadow}
+              `}
+            >
+              <Icon className={`h-4.5 w-4.5 shrink-0 ${badge.color}`} />
+              <span className="whitespace-nowrap text-xs font-semibold text-ink-100">
+                {badge.name}
+              </span>
+            </div>
+          </motion.div>
+        );
+      })}
+
       {/* =====================================================
-          SKILLS & TECHNOLOGIES
+          MAIN SKILLS SHOWCASE CARD
       ===================================================== */}
       <motion.div
         initial={{
           opacity: 0,
-          y: -10,
+          scale: 0.95,
+          y: 20,
         }}
         animate={{
           opacity: 1,
+          scale: 1,
           y: 0,
         }}
         transition={{
-          duration: 0.6,
-          delay: 0.45,
+          duration: 0.65,
+          delay: 0.35,
+          ease: [0.22, 1, 0.36, 1],
         }}
         className="
           relative
-          z-30
+          z-20
           w-full
           rounded-2xl
           border
           border-ink-700/80
           bg-ink-950/95
-          p-3.5
+          p-4
+          sm:p-5
           shadow-2xl
-          shadow-black/40
+          shadow-black/60
           backdrop-blur-xl
-
-          [@media(max-height:800px)]:p-3
-          [@media(max-height:700px)]:p-2.5
         "
+        style={{
+          transform: 'translateZ(20px)',
+        }}
       >
         {/* Header */}
-        <div className="mb-2.5 flex items-center justify-between">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-ink-800/80 pb-3.5">
           <div>
-            <p
-              className="
-                text-[10px]
-                font-bold
-                uppercase
-                tracking-[0.18em]
-                text-lime-400
-              "
-            >
-              Skills & Technologies
-            </p>
-
-            <p className="mt-0.5 text-[9px] text-ink-500">
-              Full-stack development toolkit
-            </p>
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-lime-400" />
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-lime-400">
+                Technical Stack & Skills
+              </p>
+            </div>
+            <h3 className="mt-0.5 text-sm sm:text-base font-bold text-ink-50">
+              Core Technologies & Tools
+            </h3>
           </div>
 
-          <div
-            className="
-              flex
-              items-center
-              gap-1.5
-              rounded-full
-              border
-              border-lime-400/20
-              bg-lime-400/5
-              px-2.5
-              py-1
-            "
-          >
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-400" />
-
-            <span
-              className="
-                text-[8px]
-                font-medium
-                uppercase
-                tracking-wide
-                text-lime-400
-              "
-            >
-              Tech Stack
+          <div className="flex items-center gap-2 rounded-full border border-lime-400/20 bg-lime-400/5 px-3 py-1">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-lime-400" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-lime-400">
+              18+ Skills
             </span>
           </div>
         </div>
 
-        {/* Skills */}
-        <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4 md:grid-cols-5">
-          {HERO_TECHS.map((tech) => {
-            const Icon = tech.icon;
-
+        {/* Category Tabs */}
+        <div className="mb-4 flex flex-wrap items-center gap-1.5 sm:gap-2">
+          {CATEGORIES.map((category) => {
+            const isActive = activeCategory === category;
             return (
-              <motion.div
-              key={tech.name}
-              whileHover={{
-                y: -2,
-                scale: 1.02,
-              }}
-              transition={{
-                duration: 0.18,
-              }}
-              className="
-                flex
-                h-8
-                items-center
-                justify-center
-                gap-1.5
-                rounded-lg
-                border
-                border-ink-800
-                bg-ink-900/80
-                px-1.5
-                transition-all
-                hover:border-lime-400/40
-                hover:bg-ink-800
-
-                [@media(max-height:800px)]:h-7
-                [@media(max-height:700px)]:h-6
-              "
-            >
-                <Icon
-                  className={`h-3 w-3 shrink-0 ${tech.color}`}
-                />
-
-              <span
-                className="
-                  truncate
-                  text-[8px]
-                  font-semibold
-                  text-ink-200
-                  sm:text-[9px]
-                "
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`
+                  rounded-lg
+                  px-2.5
+                  py-1.5
+                  text-xs
+                  font-medium
+                  transition-all
+                  duration-200
+                  ${
+                    isActive
+                      ? 'bg-lime-400 text-ink-950 font-semibold shadow-md shadow-lime-400/20'
+                      : 'border border-ink-800 bg-ink-900/80 text-ink-400 hover:border-ink-700 hover:bg-ink-800 hover:text-ink-100'
+                  }
+                `}
               >
-                {tech.name}
-              </span>
-              </motion.div>
+                {category}
+              </button>
             );
           })}
         </div>
-      </motion.div>
 
-      {/* =====================================================
-          TERMINAL AREA
-      ===================================================== */}
-      <div className="relative mt-3 w-full">
-        {/* Green glow */}
-        <div
-          className="
-            pointer-events-none
-            absolute
-            -inset-6
-            rounded-4xl
-            bg-linear-to-br
-            from-lime-400/12
-            via-emerald-500/8
-            to-transparent
-            blur-3xl
-          "
-        />
-
-        {/* ===================================================
-            FLOATING BADGES
-        =================================================== */}
-
-        {/* ===================================================
-            FLOATING TECH BADGES
-        =================================================== */}
-        {[
-          {
-            index: 0,
-            position: '-left-5 top-8',
-            animation: 'animate-float-slow',
-            delay: 0.8,
-            shadow: 'shadow-purple-500/10',
-          },
-          {
-            index: 5,
-            position: '-right-5 top-10',
-            animation: 'animate-float-medium',
-            delay: 0.9,
-            shadow: 'shadow-green-500/10',
-          },
-          {
-            index: 2,
-            position: '-left-8 top-[48%]',
-            animation: 'animate-float-fast',
-            delay: 1,
-            shadow: 'shadow-cyan-500/10',
-          },
-          {
-            index: 1,
-            position: '-right-7 top-[32%]',
-            animation: 'animate-float-fast',
-            delay: 1.05,
-            shadow: 'shadow-yellow-500/10',
-          },
-          {
-            index: 3,
-            position: '-right-6 bottom-[18%]',
-            animation: 'animate-float-slow',
-            delay: 1.1,
-            shadow: 'shadow-cyan-500/10',
-          },
-        ].map((badge) => {
-          const tech = HERO_TECHS[badge.index];
-
-          if (!tech) return null;
-
-          const Icon = tech.icon;
-
-          return (
-            <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: badge.delay, type: 'spring' }}
-              className={`
-                absolute
-                z-30
-                ${badge.position}
-                ${badge.animation}
-                hidden
-                sm:block
-              `}
-              style={{ transform: 'translateZ(50px)' }}
-            >
-              <div
-                className={`
-                  flex
-                  items-center
-                  gap-2
-                  rounded-xl
-                  border
-                  border-ink-700
-                  bg-ink-900/95
-                  px-3
-                  py-2
-                  shadow-xl
-                  backdrop-blur-md
-                  ${badge.shadow}
-                `}
-              >
-                <Icon className={`h-4 w-4 ${tech.color}`} />
-
-                <span className="whitespace-nowrap text-[10px] font-semibold text-ink-100">
-                  {tech.name}
-                </span>
-              </div>
-            </motion.div>
-          );
-        })}
-
-        {/* ===================================================
-            EXPERIENCE TERMINAL
-        =================================================== */}
+        {/* Skills Grid */}
         <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.94,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.75,
-            delay: 0.4,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          layout
           className="
-            relative
-            z-20
-            w-full
-            overflow-hidden
-            rounded-2xl
-            border
-            border-ink-700
-            bg-ink-950
-            shadow-2xl
-            shadow-black/50
+            grid
+            grid-cols-2
+            gap-2.5
+            sm:grid-cols-3
+            max-h-72
+            sm:max-h-80
+            overflow-y-auto
+            pr-1
+            scrollbar-hide
           "
-          style={{
-            transform: 'translateZ(20px)',
-          }}
         >
-          {/* Terminal Header */}
-          <div
-            className="
-              flex
-              items-center
-              gap-3
-              border-b
-              border-ink-800
-              bg-ink-900/90
-              px-4
-              py-2.5
-            "
-          >
-            <div className="flex shrink-0 gap-1.5">
-              <span className="h-3 w-3 rounded-full bg-red-500/80" />
-              <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-              <span className="h-3 w-3 rounded-full bg-green-500/80" />
-            </div>
+          <AnimatePresence mode="popLayout">
+            {filteredSkills.map((skill) => {
+              const Icon = skill.icon;
+              return (
+                <motion.div
+                  key={skill.name}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                  whileHover={{ y: -2 }}
+                  className="
+                    group
+                    flex
+                    items-center
+                    gap-3
+                    rounded-xl
+                    border
+                    border-ink-800/90
+                    bg-ink-900/70
+                    p-2.5
+                    sm:p-3
+                    transition-all
+                    duration-200
+                    hover:border-lime-400/40
+                    hover:bg-ink-900
+                    hover:shadow-lg
+                    hover:shadow-lime-400/5
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      h-9
+                      w-9
+                      sm:h-10
+                      sm:w-10
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-lg
+                      border
+                      border-ink-800
+                      bg-ink-950/90
+                      transition-transform
+                      duration-200
+                      group-hover:scale-110
+                      group-hover:border-lime-400/30
+                    "
+                  >
+                    <Icon className={`h-5 w-5 ${skill.color}`} />
+                  </div>
 
-            <div
-              className="
-                flex
-                h-6
-                flex-1
-                items-center
-                rounded-md
-                border
-                border-ink-700
-                bg-ink-950
-                px-3
-              "
-            >
-              <span className="truncate text-[9px] font-mono text-ink-500">
-                ~/portfolio/experience.json
-              </span>
-            </div>
-
-            <div className="hidden items-center gap-1.5 sm:flex">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-lime-400" />
-
-              <span className="text-[8px] font-mono text-ink-500">
-                ONLINE
-              </span>
-            </div>
-          </div>
-
-          {/* Terminal Tabs */}
-          <div
-            className="
-              flex
-              items-center
-              border-b
-              border-ink-800
-              bg-ink-900/60
-            "
-          >
-            <div
-              className="
-                flex
-                items-center
-                gap-2
-                border-r
-                border-ink-800
-                bg-ink-800/40
-                px-4
-                py-2
-              "
-            >
-              <Terminal className="h-3.5 w-3.5 text-lime-400" />
-
-              <span className="text-[9px] font-medium text-ink-200">
-                Terminal
-              </span>
-            </div>
-
-            <div
-              className="
-                hidden
-                items-center
-                gap-2
-                border-r
-                border-ink-800
-                px-4
-                py-2
-                sm:flex
-              "
-            >
-              <BriefcaseBusiness className="h-3 w-3 text-ink-600" />
-
-              <span className="text-[9px] text-ink-500">
-                experience.json
-              </span>
-            </div>
-
-            <div className="ml-auto px-3">
-              <span
-                className="
-                  rounded-md
-                  border
-                  border-ink-700
-                  bg-ink-950
-                  px-2
-                  py-1
-                  text-[7px]
-                  font-mono
-                  text-ink-500
-                "
-              >
-                JSON
-              </span>
-            </div>
-          </div>
-
-          {/* Terminal Content */}
-          <div
-            className="
-              bg-ink-950
-              px-5
-              py-4
-              font-mono
-              text-[10px]
-              leading-[1.75]
-
-              sm:min-h-75
-              sm:px-6
-              sm:py-5
-              sm:text-[11px]
-
-              [@media(max-height:800px)]:sm:min-h-67.5
-              [@media(max-height:700px)]:sm:min-h-61.25
-              [@media(max-height:800px)]:py-3
-            "
-          >
-            {/* Command */}
-            <div className="mb-2 flex flex-wrap items-center gap-2">
-              <span className="text-lime-400">
-                ajhar@portfolio
-              </span>
-
-              <span className="text-ink-600">
-                :~$
-              </span>
-
-              <span className="text-ink-200">
-                cat experience.json
-              </span>
-            </div>
-
-            {/* JSON */}
-            <div className="space-y-0.5">
-              <div className="text-ink-500">
-                {'{'}
-              </div>
-
-              {/* Role */}
-              <div className="pl-4 sm:pl-6">
-                <span className="text-purple-400">
-                  "role"
-                </span>
-
-                <span className="text-ink-500">
-                  :{' '}
-                </span>
-
-                <span className="text-yellow-300">
-                  "Remote Full Stack Developer"
-                </span>
-
-                <span className="text-ink-500">
-                  ,
-                </span>
-              </div>
-
-              {/* Company */}
-              <div className="pl-4 sm:pl-6">
-                <span className="text-purple-400">
-                  "company"
-                </span>
-
-                <span className="text-ink-500">
-                  :{' '}
-                </span>
-
-                <span className="text-lime-400">
-                  "CodeSunset"
-                </span>
-
-                <span className="text-ink-500">
-                  ,
-                </span>
-              </div>
-
-              {/* Joining Date */}
-              <div className="pl-4 sm:pl-6">
-                <span className="text-purple-400">
-                  "joiningDate"
-                </span>
-
-                <span className="text-ink-500">
-                  :{' '}
-                </span>
-
-                <span className="text-cyan-300">
-                  "08 April 2024"
-                </span>
-
-                <span className="text-ink-500">
-                  ,
-                </span>
-              </div>
-
-              {/* Location */}
-              <div className="pl-4 sm:pl-6">
-                <span className="text-purple-400">
-                  "location"
-                </span>
-
-                <span className="text-ink-500">
-                  :{' '}
-                </span>
-
-                <span className="text-orange-300">
-                  "Bengaluru, Electronic City Phase 1"
-                </span>
-
-                <span className="text-ink-500">
-                  ,
-                </span>
-              </div>
-
-              {/* Job Type */}
-              <div className="pl-4 sm:pl-6">
-                <span className="text-purple-400">
-                  "jobType"
-                </span>
-
-                <span className="text-ink-500">
-                  :{' '}
-                </span>
-
-                <span className="text-green-300">
-                  "Remote"
-                </span>
-              </div>
-
-              <div className="text-ink-500">
-                {'}'}
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div className="my-3 border-t border-ink-900" />
-
-            {/* Status */}
-            <div className="space-y-1 text-[9px] sm:text-[10px]">
-              <div className="flex items-center gap-2">
-                <span className="text-lime-400">
-                  ✓
-                </span>
-
-                <span className="text-ink-400">
-                  Experience loaded successfully
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-lime-400">
-                  ✓
-                </span>
-
-                <span className="text-ink-400">
-                  Full-stack development environment ready
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-lime-400">
-                  ✓
-                </span>
-
-                <span className="text-ink-400">
-                  Building scalable web applications
-                </span>
-              </div>
-            </div>
-
-            {/* Cursor */}
-            <div className="mt-3 flex items-center gap-2">
-              <span className="text-lime-400">
-                ajhar@portfolio
-              </span>
-
-              <span className="text-ink-600">
-                :~$
-              </span>
-
-              <motion.span
-                animate={{
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 1,
-                }}
-                className="inline-block h-3.5 w-1.5 bg-lime-400"
-              />
-            </div>
-          </div>
-
-          {/* Terminal Footer */}
-          <div
-            className="
-              flex
-              items-center
-              justify-between
-              border-t
-              border-ink-800
-              bg-ink-900/80
-              px-4
-              py-2
-            "
-          >
-            <div className="flex items-center gap-4">
-              <span className="text-[8px] font-mono text-ink-600">
-                ~/portfolio
-              </span>
-
-              <span
-                className="
-                  hidden
-                  text-[8px]
-                  font-mono
-                  text-ink-600
-                  sm:block
-                "
-              >
-                main
-              </span>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <span className="text-[8px] font-mono text-ink-600">
-                UTF-8
-              </span>
-
-              <span className="text-[8px] font-mono text-lime-400">
-                READY
-              </span>
-            </div>
-          </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-xs sm:text-sm font-semibold text-ink-100 transition-colors group-hover:text-lime-300">
+                      {skill.name}
+                    </p>
+                    <p className="truncate text-[10px] sm:text-[11px] font-normal text-ink-400">
+                      {skill.badge}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </motion.div>
-      </div>
+
+        {/* Footer info bar */}
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-ink-800/80 pt-3 text-xs">
+          <div className="flex items-center gap-1.5 text-ink-300">
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-lime-400" />
+            <span className="text-[11px] sm:text-xs font-medium">
+              Full-Stack Architecture & Clean Code
+            </span>
+          </div>
+
+          <span className="rounded-md border border-lime-400/20 bg-lime-400/10 px-2.5 py-1 font-mono text-[10px] sm:text-[11px] font-semibold text-lime-400">
+            Production Ready
+          </span>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -1133,11 +844,11 @@ export default function Hero() {
           </div>
 
           {/* =================================================
-              RIGHT VISUAL
+              RIGHT VISUAL: SKILLS SHOWCASE
           ================================================= */}
 
           <div className="relative mt-4 w-full sm:mt-6 lg:mt-0">
-            <CodeEditorVisual />
+            <HeroSkillsVisual />
           </div>
         </div>
       </div>
