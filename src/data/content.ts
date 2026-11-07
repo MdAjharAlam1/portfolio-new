@@ -9,10 +9,10 @@ import {
 
 export const NAV_LINKS = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
@@ -338,6 +338,12 @@ export const SERVICES: Service[] = [
     description: 'AWS-based application deployment and cloud infrastructure.',
     icon: CloudUpload,
   },
+  {
+    number: "05",
+    title: "Generative AI",
+    description: "Building AI-powered applications using LLMs, prompt engineering, local AI models, and AI APIs.",
+    icon: BrainCircuit,
+  }
 ];
 
 export interface Principle {
@@ -384,7 +390,7 @@ export interface ExperienceItem {
 
 export const EXPERIENCES: ExperienceItem[] = [
   {
-    company: 'Codesunset',
+    company: 'Techsunset',
     role: 'Full-Stack Developer',
     location: 'Bengaluru, India • Remote',
     period: 'April 2024 – November 2026',
@@ -411,23 +417,31 @@ export interface EducationItem {
 }
 
 export const EDUCATIONS: EducationItem[] = [
-  
-{
-  degree: 'MERN Stack Developer',
-  field: 'Full Stack Web Development',
-  institution: 'WAP Institute',
-  period: '2022',
-  description: 'Practical training in MongoDB, Express.js, React.js, Node.js, REST APIs, authentication, and full-stack web application development.',
-  icon: Code2,
-},
-{
-  degree: '12th — PCM Science',
-  field: 'Physics, Chemistry & Mathematics',
-  institution: 'Higher Secondary Education',
-  period: '2021',
-  description: 'Completed higher secondary education with a focus on Physics, Chemistry, and Mathematics.',
-  icon: BookOpen,
-},
+
+  {
+    degree: 'MERN Stack Developer',
+    field: 'Full Stack Web Development',
+    institution: 'WAP Institute',
+    period: '2022-2023',
+    description: 'Practical training in MongoDB, Express.js, React.js, Node.js, REST APIs, authentication, and full-stack web application development.',
+    icon: Code2,
+  },
+  {
+    degree: '12th — PCM Science',
+    field: 'Physics, Chemistry & Mathematics',
+    institution: 'Higher Secondary Education',
+    period: '2019-2021',
+    description: 'Completed higher secondary education with a focus on Physics, Chemistry, and Mathematics.',
+    icon: BookOpen,
+  },
+  {
+    degree: "Bachelor's of Arts",
+    field: 'Political Science',
+    institution: 'Higher Secondary Education',
+    period: '2021-2024',
+    description: 'Completed higher secondary education with a focus on Physics, Chemistry, and Mathematics.',
+    icon: BookOpen,
+  }
 ];
 
 export interface StatItem {
@@ -446,8 +460,8 @@ export const STATS: StatItem[] = [
 ];
 
 export const CONTACT_LINKS = {
-  email: '',
-  whatsapp: "9162045107901",
+  email: 'mdajharalamtechsunset@gmail.com',
+  whatsapp: "917766025789",
 };
 
 export const PROFILE = {

@@ -777,7 +777,7 @@ export default function Hero() {
 
               {/* Resume */}
               <MagneticButton
-                href="/resume.pdf"
+                href="/md_ajhar_alam.pdf"
                 download="Md-Ajhar-Alam-Resume.pdf"
                 className="
                   group
